@@ -32,8 +32,8 @@ import { NODE_URL, FAUCET_URL } from "./common";
 
   // Fund accounts.
   // :!:>section_3
-  await faucetClient.fundAccount(alice.address(), 2000_000);
-  // await faucetClient.fundAccount(bob.address(), 0); // <:!:section_3
+  await faucetClient.fundAccount(alice.address(), 100_000_000);
+  await faucetClient.fundAccount(bob.address(), 0); // <:!:section_3
 
   // Print out initial balances.
   console.log("=== Initial Balances ===");
@@ -44,9 +44,7 @@ import { NODE_URL, FAUCET_URL } from "./common";
 
   // Have Alice send Bob some AptosCoins.
   // :!:>section_5
-  let txnHash = await coinClient.transfer(alice, bob, 1_000, {
-    gasUnitPrice: 100n,
-  }); // <:!:section_5
+  let txnHash = await coinClient.transfer(alice, bob, 1_000, { gasUnitPrice: BigInt(100) }); // <:!:section_5
   // :!:>section_6a
   await client.waitForTransaction(txnHash); // <:!:section_6a
 
@@ -57,9 +55,7 @@ import { NODE_URL, FAUCET_URL } from "./common";
   console.log("");
 
   // Have Alice send Bob some more AptosCoins.
-  txnHash = await coinClient.transfer(alice, bob, 1_000, {
-    gasUnitPrice: 100n,
-  });
+  txnHash = await coinClient.transfer(alice, bob, 1_000, { gasUnitPrice: BigInt(100) });
   // :!:>section_6b
   await client.waitForTransaction(txnHash, { checkSuccess: true }); // <:!:section_6b
 
